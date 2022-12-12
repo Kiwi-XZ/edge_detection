@@ -1,0 +1,4 @@
+src/.vscode
+src/*.py
+build
+
