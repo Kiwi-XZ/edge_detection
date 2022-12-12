@@ -37,8 +37,8 @@ cv::Mat EdgeDetector::canny(cv::Mat img) {
     cv::Mat img_blur = gaussian_blur(img);
     cv::Mat edges, result_img;
     cv::Canny(img_blur, edges, 100, 200, 3, false);
-    std::cout<<"edges size"<<edges.size()<<std::endl;
-    std::cout<<"img size"<<img.size()<<std::endl;
+    cout << "edges size" << edges.size() << endl;
+    cout << "img size" << img.size() << endl;
     result_img = merge_img(img, edges);
     return result_img;
 }
@@ -49,7 +49,7 @@ cv::Mat EdgeDetector::direct_detect(cv::Mat img) {
     // convert original rgb image to gray image
     cvtColor(img, img_gray, cv::COLOR_BGR2GRAY);
     threshold(img_gray, thresh, 150, 255, THRESH_BINARY);
-    // detect the contours on the binary image using cv2.CHAIN_APPROX_NONE
+    // detect the contours on the image using CHAIN_APPROX_NONE
     vector<vector<Point>> contours;
     vector<Vec4i> hierarchy;
     findContours(thresh, contours, hierarchy, RETR_TREE, CHAIN_APPROX_NONE);
@@ -59,30 +59,6 @@ cv::Mat EdgeDetector::direct_detect(cv::Mat img) {
     return img_copy;
 }
 
-
-// int main(int argc, char** argv)
-// {
-//     // Reading image
-//     // cv::Mat img = cv::imread("../data/Image_1.png");
-//     std::string image_path = argv[1];
-//     std::cout << "image path: " << image_path << std::endl;
-
-//     cv::Mat img = cv::imread(image_path);
-//     if(img.empty())
-//     {
-//         std::cout << "Could not read the image: " << image_path << std::endl;
-//         return 1;
-//     }
-
-//     edge_detection::EdgeDetector detector;
-    
-//     // cv::imshow("Canny", detector.canny(img));
-//     // cv::imshow("Sobel", detector.sobel(img));
-//     cv::imshow("Edge in green", detector.sobel(img));
-//     cv::waitKey(0);
-//     cv::destroyAllWindows();
-//     return 0;
-// }
 
 int main()
 {
